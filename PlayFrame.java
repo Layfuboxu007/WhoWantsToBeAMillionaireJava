@@ -2,13 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class PlayFrame {
-    public void openPlayFrame() {
-        JFrame play = new JFrame("Welcome to Who Wants To Be A Millionaire!");
-        play.setSize(800, 800);
-        play.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        play.setLocationRelativeTo(null);
-        play.setResizable(false);
-
+    public void openPlayUI(JFrame frame) {
         JPanel questionPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -22,6 +16,10 @@ class PlayFrame {
         questionButton.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         questionButton.setPreferredSize(new Dimension(100, 30)); 
         questionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton replaceButton = new JButton("Replace");
+        replaceButton.setFont(new Font(Font.SERIF, Font.BOLD, 25)); 
+        replaceButton.setFocusable(false);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -38,7 +36,8 @@ class PlayFrame {
         paddedPanel.setBorder(BorderFactory.createEmptyBorder(200, 100, 200, 100));
         paddedPanel.add(questionPanel, BorderLayout.CENTER);
 
-        play.add(paddedPanel, BorderLayout.CENTER);
-        play.setVisible(true);
+        frame.add(paddedPanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
     }
 }
