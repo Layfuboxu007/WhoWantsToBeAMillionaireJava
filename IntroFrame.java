@@ -3,60 +3,67 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class IntroFrame {
-    public void runUI() {
-        PlayFrame play = new PlayFrame();
+public class IntroFrame {
+    private JFrame frame;
+    private CardLayout crdLayout;  // CardLayout for easy screen switching.
+    private JPanel mainContainer;  // Container to hold all panels.
 
-        JFrame intro = new JFrame("Who Wants To Be A Millionaire");
-        intro.setSize(800, 800);
-        intro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        intro.setLocationRelativeTo(null);
-        intro.setResizable(false);
+    public void showUI() {
+        frame = new JFrame("Who Wants To Be A Millionaire");
+        frame.setSize(800, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
 
-        JPanel introPanel = new JPanel();
-        introPanel.setLayout(new BorderLayout());
-
-        JLabel titleLabel = new JLabel("Who wants to be a millionaire!");
-        Font titleLabelFont = new Font(Font.SERIF, Font.BOLD, 30);
-        titleLabel.setFont(titleLabelFont);    
+        crdLayout = new CardLayout();  // Initialize CardLayout.
+        mainContainer = new JPanel(crdLayout);  // Set mainContainer with CardLayout.
+        
+        // Create intro screen panel.
+        JPanel introPanel = new JPanel(new BorderLayout());
+        
+        // Set up title label
+        JLabel titleLabel = new JLabel("Who Wants To Be A Millionaire!");
+        titleLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setBorder(BorderFactory.createEmptyBorder(45, 0, 0, 0));
 
+        // Logo placeholder (another class)
         Logo logo = new Logo();
-
-        JPanel introAnimationPanel = new JPanel();
-        introAnimationPanel.setLayout(new BorderLayout());
+        JPanel introAnimationPanel = new JPanel(new BorderLayout());
         introAnimationPanel.add(logo, BorderLayout.CENTER);
 
+        // Adding title and logo to intro panel
         introPanel.add(titleLabel, BorderLayout.NORTH);
         introPanel.add(introAnimationPanel, BorderLayout.CENTER);
 
-        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        // Play Button setup and listener for screen change
         JButton playButton = new JButton("Play");
-        playButton.setFont(new Font(Font.SERIF, Font.BOLD, 25)); 
-        playButton.setBackground(new Color(158, 114, 195, 1)); 
-        playButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
+        playButton.setFont(new Font(Font.SERIF, Font.BOLD, 25));
+        playButton.setBackground(new Color(158, 114, 195, 1));
         playButton.setFocusable(false);
-
-        JButton replaceButton = new JButton("Replace");
-        replaceButton.setFont(new Font(Font.SERIF, Font.BOLD, 25)); 
-        replaceButton.setBackground(new Color(158, 114, 195, 1)); 
-        replaceButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
-        replaceButton.setFocusable(false);
-
-        buttonsPanel.add(playButton);
+        playButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
 
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                intro.getContentPane().removeAll();
-                play.openPlayUI(intro);
+                // Switch to PlayFrame panel using CardLayout.
+                crdLayout.show(mainContainer, "PlayFrame");
             }
         });
 
+        // Adding button to intro panel.
+        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        buttonsPanel.add(playButton);
         introPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
-        intro.add(introPanel);
-        intro.setVisible(true);
+        // Adding introPanel to mainContainer with CardLayout.
+        mainContainer.add(introPanel, "IntroFrame");
+
+        // Adding PlayFrame panel to mainContainer.
+        PlayFrame playFrame = new PlayFrame();
+        mainContainer.add(playFrame.createPlayPanel(), "PlayFrame");
+
+        frame.add(mainContainer);
+        frame.setVisible(true);
     }
 }
