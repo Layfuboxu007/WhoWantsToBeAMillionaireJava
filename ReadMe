@@ -1,1 +1,54 @@
 Objective: Create Buttons
+
+******November 8, 2024***** APPLIED CARDLAYOUT
+Nunez, Jan Daeve Louis P.
+
+1. In IntroFrame Class, gi-setup nako siya as the main introductory main screen.
+Nya I applied the CardLayout na karon sa IntroFrame para dali ra to switch between
+screens without needing to remove and add components manually (Just as we tried 
+and did out of curiousness of Amlani's idea). Now, I can simply show different
+panels in the same frame by calling cardLayout.show(); P.S. Wala nako na-sunod ang 
+structure sa given nga CardLayoutDemo nga gi-hatag ni Sir Hoylar kay medj nag-libog 
+ko sa part sa PanelMouseListener, medj unfamiliar pa nga structure for me. Instead 
+ni-watch nalang ko another tutorial sa youtube pero mostly ga-base ra ko sa gi-hatag 
+nga CardLayoutDemo ni Sir Hoylar.
+
+- Why CardLayout? Using CardLayout allows us to switch between screens nga less ra
+ang code nga magamit and without having to clear sa mga contents and repaint sa
+content pane each time.
+- Sa Panel Structure, ga-himo ko JPanel introPanel nga maoy mo-hold sa introductory 
+components sa katong title, logo, ug sa playButton (which is makapa-proceed sa user 
+to the next screen).
+- Play Button Action, gi-update ang playButton ActionEvent nga once nga i-click sa user, 
+mo-switch siya into playFrame panel using cardLayout.show(container, "Play Frame").
+
+
+2. Gi-modify nako ang PlayFrame class nga ma-align siya with CardLayout. Instead of 
+adding PlayFrame components directly sa IntroFrame (katong intro.getContentPane.removeAll() 
+nya fill dayon ang components sa PlayFrame Class to IntroFrame Class' frame). Ang 
+alternative nga ako gi-kuan is nag-himo ko createPlayPanel() in PlayFrame tas like mo-return 
+siya ug JPanel. Sa ingon-ani nga way, pwede nako simply ma-add ang gi-return nga JPanel sa 
+container nga naay card name nga "PlayFrame" para mas limpyo ang layout.
+
+- Purpose sa createPlayPanel(), kani nga method kay mo-encapsulate sa Play screen's components 
+sa isa ka panel, which dali ra ma-add ang IntroFrame.
+
+---------SUMMARY OF CHANGES AS OF NOVEMBER 8, 2024---------
+* CardLayout in IntroFrame: Makes it easy to switch between panels (IntroFrame and PlayFrame)
+with a single command.
+* Separate Play Panel Creation in PlayFrame: The createPlayPanel() method modularizes the Play 
+screen, making IntroFrame cleaner and dali ra ma-maintain sa pag-kuan sa code.
+* Play Button Action: Triggers CardLayout to display the PlayFrame panel without the need for 
+removing and adding components manually.
+
+- Ang na-boangan karon: Nag-tagbaw ug ka-boang nganu dili mawala ang outline around the text 
+inside sa "ME!" button nga naa naman jud "playButton.setFocusable(false)", na-set naman jud 
+into false. Nag-tagbaw ko pangita alternative way kay last time gi-explain and gipa-kita nako 
+ni Amlani about sa functionality ana nga method is to get rid of the outline of the text inside 
+the button, tas karon kay na-boang kung nganu dili mo-gana, nga naka-affect ba kaha kaya ang 
+akong pag-change and revise sa structure sa code. Mao to nangita jud ko alternative, stackoverflow, 
+w3schools, I even prompted ChatGPT tanan methods nga related ana. It took me 30 whole minutes to 
+realize sa pag-stare nako sa code nga playButton.setFocusable(false), "PLAYBUTTON" juicecolored 
+sa playButton man diay tas ang sa "ME!" kay sa PlayFrame man diay to nga button which is 
+questionButton. Sig tinanga gud HAAHAHAA.
+
