@@ -3,6 +3,6 @@ public class Main {
         
         IntroFrame frame = new IntroFrame();
 
-        frame.runUI();
+        frame.showUI();
     }
 }
