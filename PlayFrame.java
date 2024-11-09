@@ -1,7 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PlayFrame {
+    private Main mainClass;
+
+    public PlayFrame(Main mainClass) {
+        this.mainClass = mainClass;
+    }
+
     public JPanel createPlayPanel() {
         // Panel for play screen with GridBagLayout for organized positioning.
         JPanel questionPanel = new JPanel(new GridBagLayout());
@@ -19,6 +27,14 @@ public class PlayFrame {
         questionButton.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         questionButton.setPreferredSize(new Dimension(100, 30));
         questionButton.setFocusable(false);
+
+        questionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Switch to PlayFrame panel using CardLayout.
+                mainClass.showPanel("AskUserName");
+            }
+        });
 
         gbc.gridx = 0;
         gbc.gridy = 0;
