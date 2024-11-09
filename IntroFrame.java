@@ -4,19 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class IntroFrame {
-    private JFrame frame;
-    private CardLayout crdLayout;  // CardLayout for easy screen switching.
-    private JPanel mainContainer;  // Container to hold all panels.
+    private Main mainClass;
 
-    public void showUI() {
-        frame = new JFrame("Who Wants To Be A Millionaire");
-        frame.setSize(800, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+    public IntroFrame(Main mainClass) {
+        this.mainClass = mainClass;
+    }
 
-        crdLayout = new CardLayout();  // Initialize CardLayout.
-        mainContainer = new JPanel(crdLayout);  // Set mainContainer with CardLayout.
+    public JPanel createIntroPanel() {
         
         // Create intro screen panel.
         JPanel introPanel = new JPanel(new BorderLayout());
@@ -47,7 +41,7 @@ public class IntroFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Switch to PlayFrame panel using CardLayout.
-                crdLayout.show(mainContainer, "PlayFrame");
+                mainClass.showPanel("PlayFrame");
             }
         });
 
@@ -56,14 +50,6 @@ public class IntroFrame {
         buttonsPanel.add(playButton);
         introPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
-        // Adding introPanel to mainContainer with CardLayout.
-        mainContainer.add(introPanel, "IntroFrame");
-
-        // Adding PlayFrame panel to mainContainer.
-        PlayFrame playFrame = new PlayFrame();
-        mainContainer.add(playFrame.createPlayPanel(), "PlayFrame");
-
-        frame.add(mainContainer);
-        frame.setVisible(true);
+        return introPanel;
     }
 }
