@@ -1,5 +1,6 @@
 Objective: Create Buttons
 
+
 ******November 8, 2024***** APPLIED CARDLAYOUT
 Nunez, Jan Daeve Louis P.
 
@@ -52,3 +53,65 @@ realize sa pag-stare nako sa code nga playButton.setFocusable(false), "PLAYBUTTO
 sa playButton man diay tas ang sa "ME!" kay sa PlayFrame man diay to nga button which is 
 questionButton. Sig tinanga gud HAAHAHAA.
 
+
+
+******November 14, 2024***** ADDED NEW PANEL: WELCOMEUSER
+Nunez, Jan Daeve Louis P.
+
+1. AskUserName Class
+- I added a JTextField swing component to the panel for requesting the user to input their name as per 
+Amlani's idea and added a JButton "Enter" for the user to enter if the user is done inputting his/her name. 
+I tried putting all components (JLabel, JTextField, and JButton) into another panel declared as askUserNamePanel 
+at first and added the askUserNamePanel in the main panel of the class declared as userPanel. I had problems 
+about the layout of the panel like the border of each components because it's always sticking to each other or 
+it won't be vertically aligned to each other like the JTextField is below JLabel and JButton is below JTextField. 
+I tried many layout managers like BorderLayout, GridLayout, FlowLayout, and finally I tried GridBagLayout, I once
+tried GridBagLayout already in PlayFrame Class' layout. And I remembered about using GridBagLayout (to vertically align 
+the components without filling whole panel) after I was totally exhausted about how to resolve this matter. I 
+referenced the layout of AskUserName Class to PlayFrame Class' layout. And as I was applying it, I encountered 
+problems about the JTextField and the JButton getting stick together. I tried to setBorder of the JButton 
+[enterButton.setBorder(new BorderFactory.createEmptyBorder(20, 0, 0, 0));] but it only resizes the buttons'
+top insides part not like putting padding on the top. I tried in the JButton because I already know that if I'll 
+apply it in the JTextField it'll only do the same. After getting minutes of headache as to how to resolve it, 
+I had an idea about putting the JTextField in another panel declared as textFieldPanel and add it to askUserNamePanel
+and apply [textFieldPanel.setBorder(new BorderFactory.createEmptyBorder(0, 0, 20, 0));] to the textFieldPanel so 
+it'll have a padding-top and GLADLY it worked. And  after that when the user clicks "Enter" button, the 
+ActionListener captures the event, collects the user input, and should proceed to the next frame and display's
+user's userName in WelcomeUser Class. But the problem I encountered was the WelcomeUser class isn't able to 
+access the updated userName from the AskUserName class. This is because the WelcomeUser class creates a new 
+instance of AskUserName each time it is used. As a result, the userName variable in the newly created AskUserName 
+instance is not the one that was updated with user input. Instead, it starts with its default value (which is null).
+Therefore, the WelcomeUser class doesn’t get the correct userName value that was set when the user clicked the 
+"Enter" button in the AskUserName panel. The solution to this problem is I added a getter method (getUserName()) 
+to retrieve the value stored in userName. This method makes the userName variable accessible outside of the class, 
+enabling other parts of the app to use the user's name if needed. And to share the same instance of AskUserName 
+between the AskUserName and WelcomeUser classes. Instead of creating a new AskUserName object inside WelcomeUser,
+we pass the existing instance of AskUserName to WelcomeUser. This way, the WelcomeUser class can access the updated
+userName value that was set by the user in the AskUserName panel. By sharing the same instance, both classes refer
+to the same userName variable, ensuring that the value is consistent and up-to-date when WelcomeUser Class triies to use it.
+
+1. WelcomeUser Class
+- I created a new Class declared as WelcomeUser, which has components like JLabel. It displays a message welcoming the 
+user by name. It first checks if the userName is null or empty. If it is not, it constructs a personalized greeting message. 
+If the user hasn't entered a name, it falls back to a default message ("Guest Player"). By passing the 
+AskUserName instance to WelcomeUser, it is able to access the updated userName via the getUserName() method
+and display it in the welcome message. 
+
+> I stopped at display a welcome message for the user for now because my brain is so fried already. We'll continue next 
+time because we haven't been able to agreen on what ideas we'll follow onto what's gonnabe next in like what's in the 
+WelcomeUser Class panel or something due to us being busy and all because of our Semi-Finals Examinations.
+
+---------SUMMARY OF CHANGES AS OF NOVEMBER 14, 2024---------
+1. AskUserName Class
+* A JTextField was added for user input to enter their name, along with a "Enter" button.
+* Initially, components were added to a separate panel (askUserNamePanel), but layout issues arose, such as components sticking together or not aligning correctly.
+* After experimenting with various layout managers, GridBagLayout was used to align components vertically.
+* Padding was added to the JTextField by placing it in another panel (textFieldPanel), which resolved alignment issues.
+* An ActionListener captures user input when the "Enter" button is clicked and should pass the user's name to the next frame, WelcomeUser.
+* The problem was that WelcomeUser created a new AskUserName instance each time, causing it to access the default (null) value of userName.
+* The solution was to add a getUserName() method and pass the existing AskUserName instance to WelcomeUser to ensure the updated userName is correctly accessed and displayed.
+
+2. WelcomeUser Class
+* A new WelcomeUser class was created, which displays a personalized greeting using the user's name.
+* If the userName is not provided, a default message ("Guest Player") is shown.
+* By passing the existing AskUserName instance to WelcomeUser, the updated userName is accessed using the getUserName() method, ensuring the correct personalized message is displayed.
