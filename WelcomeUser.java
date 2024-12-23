@@ -39,8 +39,19 @@ public class WelcomeUser {
         welcomeUserLabel.setBorder(BorderFactory.createEmptyBorder(70, 0, 0, 0));  
 
         // Sets the font for the welcome message to be bold and sized appropriately
-        welcomeUserLabel.setFont(new Font(Font.SERIF, Font.BOLD, 20));  
+        welcomeUserLabel.setFont(new Font(Font.SERIF, Font.BOLD, 20));
 
+        Logo logo = new Logo();  // Logo is another class that displays an image ug animation.
+
+        JButton continueButton = new JButton("Continue");
+        continueButton.setFont(new Font(Font.SERIF, Font.BOLD, 25));  // Set font style and size for the button.
+        continueButton.setBackground(new Color(158, 114, 195, 1));  // Set button background color.
+        continueButton.setFocusable(false);  // Ensure button does not gain focus when clicked.
+        continueButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));  // Add spacing below the button.
+
+        welcomeUserPanel.add(logo, BorderLayout.CENTER); 
+        welcomeUserPanel.add(continueButton, BorderLayout.SOUTH); 
+        System.out.print("\n" + "I fuckin work here");
         // Adds the label to the panel using the NORTH position in BorderLayout
         welcomeUserPanel.add(welcomeUserLabel, BorderLayout.NORTH);  
 
@@ -48,4 +59,4 @@ public class WelcomeUser {
         return welcomeUserPanel;  
     }
 }
-                                                                                           
+                                                                                     
